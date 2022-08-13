@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score
 from joblib import load, dump
 
+
 pathtestdata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\testdata\\'
 pathtraindata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\traindata\\'
 pathscaleddata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\scaled\\'
