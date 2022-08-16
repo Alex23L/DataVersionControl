@@ -30,7 +30,7 @@ test_scaled = scaler.transform(x_test)
 dump(train_scaled, pathscaleddata + 'train_scaler.bin', compress=True)
 dump(test_scaled, pathscaleddata + 'test_scaler.bin', compress=True)
 
-model = MLPClassifier(max_iter=1000)
+model = MLPClassifier(max_iter=100000)
 model_trained = model.fit(train_scaled, y_train.values.ravel())
 
 dump(model_trained, pathmodel)
