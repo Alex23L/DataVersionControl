@@ -1,5 +1,7 @@
 import pandas as pd
 from sklearn.metrics import accuracy_score
+from pathlib import Path
+import json
 from joblib import load, dump
 
 
@@ -7,7 +9,7 @@ pathtestdata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\testdata\\'
 pathtraindata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\traindata\\'
 pathscaleddata = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\data\\scaled\\'
 pathmodel = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\model\\model.joblib'
-pathevaluation = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\model\\evaluation.txt'
+pathevaluation = 'C:\\Users\\Alex\\PycharmProjects\\DVC\\modelaccuracy\\evaluation.json'
 
 x_test = pd.read_csv(pathtestdata + 'x_test.csv')
 y_test = pd.read_csv(pathtestdata + 'y_test.csv')
@@ -32,5 +34,11 @@ print(accuracy_score(y_test, model_trained.predict(test_scaled)))
 train_accuracy = accuracy_score(y_train, model_trained.predict(train_scaled))
 test_accuracy = accuracy_score(y_test, model_trained.predict(test_scaled))
 
-with open(pathevaluation, 'w') as f:
-    f.write('Train: ' + str(train_accuracy) + ' Test: ' + str(test_accuracy))
+evaluation = {"train accuracy": train_accuracy,
+              "test_accuracy": test_accuracy}
+
+Path(pathevaluation).write_text(json.dumps(evaluation))
+
+
+# with open(pathevaluation, 'w') as f:
+#     f.write('Train: ' + str(train_accuracy) + ' Test: ' + str(test_accuracy))

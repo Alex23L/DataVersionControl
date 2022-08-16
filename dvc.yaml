@@ -1,0 +1,37 @@
+stages:
+  processData:
+    cmd: python source/processData.py
+    deps:
+    - data/basedata
+    - source/processData.py
+    outs:
+    - data/testdata/x_test.csv
+    - data/testdata/y_test.csv
+    - data/traindata/x_train.csv
+    - data/traindata/y_train.csv
+  trainData:
+    cmd: python source/trainModel.py
+    deps:
+    - data/testdata/x_test.csv
+    - data/testdata/y_test.csv
+    - data/traindata/x_train.csv
+    - data/traindata/y_train.csv
+    - source/trainModel.py
+    outs:
+    - data/scaled/test_scaler.bin
+    - data/scaled/train_scaler.bin
+    - model/model.joblib
+  evaluateModel:
+    cmd: python source/evaluateModel.py
+    deps:
+    - data/scaled/test_scaler.bin
+    - data/scaled/train_scaler.bin
+    - data/testdata/x_test.csv
+    - data/testdata/y_test.csv
+    - data/traindata/x_train.csv
+    - data/traindata/y_train.csv
+    - model/model.joblib
+    - source/evaluateModel.py
+    metrics:
+    - modelaccuracy/evaluation.json:
+        cache: false

@@ -1,0 +1,84 @@
+schema: '2.0'
+stages:
+  processData:
+    cmd: python source/processData.py
+    deps:
+    - path: data/basedata
+      md5: a002183a64293f3087649b5d96674ce8.dir
+      size: 85022
+      nfiles: 1
+    - path: source/processData.py
+      md5: 6a6d5ab39f121c2c61d517e4bcab2890
+      size: 1368
+    outs:
+    - path: data/testdata/x_test.csv
+      md5: 5eccb83033eec81be2088de70db21026
+      size: 27450
+    - path: data/testdata/y_test.csv
+      md5: 91db5f4a830935fe6bfcd92849fde29c
+      size: 1391
+    - path: data/traindata/x_train.csv
+      md5: 74f2b06178608aeffaeccd2748694060
+      size: 106431
+    - path: data/traindata/y_train.csv
+      md5: 128b13473bfd1087978018c61b2bb86b
+      size: 5515
+  trainData:
+    cmd: python source/trainModel.py
+    deps:
+    - path: data/testdata/x_test.csv
+      md5: 5eccb83033eec81be2088de70db21026
+      size: 27450
+    - path: data/testdata/y_test.csv
+      md5: 91db5f4a830935fe6bfcd92849fde29c
+      size: 1391
+    - path: data/traindata/x_train.csv
+      md5: 74f2b06178608aeffaeccd2748694060
+      size: 106431
+    - path: data/traindata/y_train.csv
+      md5: 128b13473bfd1087978018c61b2bb86b
+      size: 5515
+    - path: source/trainModel.py
+      md5: 6fb1509c954fb7cae574e68e7bb2ec59
+      size: 1274
+    outs:
+    - path: data/scaled/test_scaler.bin
+      md5: dd823670625d5abb56dfc845bd3cd591
+      size: 7889
+    - path: data/scaled/train_scaler.bin
+      md5: b470c75930e3d9a2858c7a666632d37a
+      size: 25381
+    - path: model/model.joblib
+      md5: 08a62f5f5660e5e6498e0786097dd2f8
+      size: 166553
+  evaluateModel:
+    cmd: python source/evaluateModel.py
+    deps:
+    - path: data/scaled/test_scaler.bin
+      md5: dd823670625d5abb56dfc845bd3cd591
+      size: 7889
+    - path: data/scaled/train_scaler.bin
+      md5: b470c75930e3d9a2858c7a666632d37a
+      size: 25381
+    - path: data/testdata/x_test.csv
+      md5: 5eccb83033eec81be2088de70db21026
+      size: 27450
+    - path: data/testdata/y_test.csv
+      md5: 91db5f4a830935fe6bfcd92849fde29c
+      size: 1391
+    - path: data/traindata/x_train.csv
+      md5: 74f2b06178608aeffaeccd2748694060
+      size: 106431
+    - path: data/traindata/y_train.csv
+      md5: 128b13473bfd1087978018c61b2bb86b
+      size: 5515
+    - path: model/model.joblib
+      md5: 08a62f5f5660e5e6498e0786097dd2f8
+      size: 166553
+    - path: source/evaluateModel.py
+      md5: a47409006b231ffdd6d2d37e41da65a1
+      size: 1661
+    outs:
+    - path: modelaccuracy/evaluation.json
+      md5: bf3e9b25dbaa958e8b779caa1a9c452c
+      size: 47
