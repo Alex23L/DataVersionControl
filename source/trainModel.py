@@ -21,7 +21,7 @@ y_test = y_test.drop(["Unnamed: 0"], axis=1)
 x_train = x_train.drop(["Unnamed: 0"], axis=1)
 y_train = y_train.drop(["Unnamed: 0"], axis=1)
 
-print(y_train)
+#print(y_train)
 
 scaler = StandardScaler()
 train_scaled = scaler.fit_transform(x_train)

@@ -28,8 +28,8 @@ test_scaled = load(pathscaleddata + 'test_scaler.bin')
 
 model_trained = load(pathmodel)
 
-print(accuracy_score(y_train, model_trained.predict(train_scaled)))
-print(accuracy_score(y_test, model_trained.predict(test_scaled)))
+#print(accuracy_score(y_train, model_trained.predict(train_scaled)))
+#print(accuracy_score(y_test, model_trained.predict(test_scaled)))
 
 train_accuracy = accuracy_score(y_train, model_trained.predict(train_scaled))
 test_accuracy = accuracy_score(y_test, model_trained.predict(test_scaled))
